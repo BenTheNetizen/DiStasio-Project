@@ -1,0 +1,33 @@
+.add-comment-button {
+    border-radius: 25px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+    margin: 10px;
+}
+
+.comment-logo {
+    max-width: 40px;
+    max-height: 40px;
+
+}
+
+.sidebar-align {
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.vertical-align {
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+    outline: 1px solid black;
+    
+}

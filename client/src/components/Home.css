@@ -1,0 +1,20 @@
+.heading-curbside{
+    display: flex;
+	height: min-content;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.document-viewing{
+	display: flex;
+	flex-direction: row;
+	height: min-content;
+	align-items: center;
+	justify-content: center;
+}
+
+.right-align{
+	display: flex;
+	margin-right: 2.5%;
+}
