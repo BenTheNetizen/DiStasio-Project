@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+'use strict';
+module.exports = function(app) {
+    var post = require('../controllers/controllers');
+    app.route('/test/')
+        .get(post.test);
+    app.route('/posts/all/')
+        .get(post.get_all_posts)
+    app.route('/posts/create/')
+        .post(post.create_post)
+};
