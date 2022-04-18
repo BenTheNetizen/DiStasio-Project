@@ -6,6 +6,9 @@ function Sidebar() {
     const addcomment = async() => {
         setaddCommentBox(true);
     }
+    const removecomment = async() => {
+        setaddCommentBox(false);
+    }
 
     return (
     <div>
@@ -24,9 +27,10 @@ function Sidebar() {
                 <div >
                     <p>
                         <div class="vertical-align">
-                            <h1>User</h1>
+                            <h1>User (blank)</h1>
                             <input />
-                            <button>Add Comment</button>
+                            <button onclick={removecomment}>Add Comment</button>
+                            <button onclick={removecomment}>Close</button>
                         </div>
                     </p>
                 </div> :
