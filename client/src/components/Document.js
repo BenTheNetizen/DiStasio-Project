@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import {Document, Page,} from 'react-pdf/dist/esm/entry.webpack';
 
 import samplePDF from '../data/sample_pathology_report1.pdf';
+import './Document.css';
 
-
-
-import './Document.css'
 
 function DocumentComponent() {
     const [numPages, setNumPages] = useState(null);
@@ -17,13 +15,18 @@ function DocumentComponent() {
 
     return (
     <div>
-        <Document 
-        file={samplePDF} 
-        options={{ workerSrc: "/pdf.worker.js" }}
-        onLoadSuccess={onDocumentLoadSuccess}
-        >
-            <Page pageNumber={pageNumber} />
-        </Document>
+        <div class="view-document">
+            <Document 
+            file={samplePDF} 
+            options={{ workerSrc: "/pdf.worker.js" }}
+            onLoadSuccess={onDocumentLoadSuccess}
+            class ="view-document"
+            >
+                <Page pageNumber={pageNumber} />
+            </Document>
+        </div>
+
+
     </div>
     );
 }
