@@ -41,6 +41,12 @@ var PostSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User',
     },
+    x_coordinate: {
+        type: Number,
+    },
+    y_coordinate: {
+        type: Number,
+    },
     comments: [],
 });
 
