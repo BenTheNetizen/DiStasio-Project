@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     name: String,
+    role: String,
 });
 
 var CommentSchema = new Schema({
