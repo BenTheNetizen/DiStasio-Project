@@ -1,8 +1,19 @@
 import './Sidebar.css';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
+
 const comments = ["comment1", "comment2"]
 
 function Sidebar() {
+    const [post, setPost] = React.useState(null);
+    React.useEffect(() => {
+        axios.get(baseURL).then((response) => {
+          setPost(response.data);
+        });
+      }, []);
+
+      
     const [addCommentBox, setaddCommentBox] = useState({});
 
     const addcomment = async() => {
@@ -25,19 +36,16 @@ function Sidebar() {
     }
     return (
     <div>
-        <p>Sidebar</p>
         <div>
-            <h1>Comments</h1>
+            <h1>Sidebar</h1>
             <div>
-                {comments.map(comment => <div class="comment-box">{comment}</div>)}
+                {comments.map(comment => <div class="comment-box">
+                {comment}
+                <button >Reply</button>
+            </div>)}
             </div>
         </div>
-        <div class="sidebar-align">
-            <button class="add-comment-button" onClick={addcomment}>+</button>
 
-            {/* <button class="add-comment-button" onClick={addcomment}><img class ="commnent-logo" alt="comment_logo" src="/comment.png"/></button> */}
-            <button>Reply to Comment</button>
-        </div>
 
 
         <div>
@@ -53,7 +61,30 @@ function Sidebar() {
                         </div>
                     </p>
                 </div> :
-                <div></div>
+                <div class="sidebar-align">
+
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                    <div>
+                        <button class="add-comment-button" onClick={addcomment}>+</button>
+                    </div>
+                </div>
             }
             </>
             

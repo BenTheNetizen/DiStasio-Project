@@ -4,8 +4,13 @@
     height: 40px;
     font-size: 25px;
     margin: 10px;
+    opacity: .1;
 }
 
+.add-comment-button:hover{
+    transform: scale(1.1);
+    opacity: 1;
+}
 .comment-logo {
     max-width: 40px;
     max-height: 40px;
@@ -37,4 +42,10 @@
     padding: 5px;
     outline: 1px solid black;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }

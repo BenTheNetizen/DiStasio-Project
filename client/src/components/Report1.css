@@ -5,24 +5,24 @@
 	justify-content: center;
 	flex-direction: column;
 	margin-bottom: 10px;
+
 }
 
-.nav-link{
-    list-style-type: none;
-    margin-right: 0 !important;
-    border-radius: 10px;
-    border: 3px solid #115be4;
-}
 .users-button{
 	border-radius: 10px;
 }
 
 .heading-curbside{
+    padding: 5px;
+    outline: 1px solid black;
+    border-radius: 10px;
     display: flex;
 	height: min-content;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .document-viewing{
@@ -36,12 +36,4 @@
 .right-align{
 	display: flex;
 	margin-right: 2.5%;
-}
-.report-button {
-	border-radius: 10px;
-	outline: 2px solid black;
-}
-
-.report-button:hover {
-	filter: brightness(125%);
 }

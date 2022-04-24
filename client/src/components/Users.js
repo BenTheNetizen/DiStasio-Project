@@ -2,17 +2,49 @@ import React, {useState} from 'react';
 
 import './Users.css';
 
+const users = ["Andy", "Ben", "Chandra", "Sarah", "Distasio", "XP"];
 
 function Users() {
+    const [user, setUser] = useState("");
+    const [currentUser, setCurrentUser] = useState("");
+    const[displayAddUserBox, setDisplayAddUserBox] = useState({});
+    const submitUser = (e) => {
+        users.push(user);
+        console.log("user is")
+        console.log(user);
+        console.log("check that add user is pressed");
+        setDisplayAddUserBox(false);
+        
+    }
+
+    const addUser = async() => {
+        setDisplayAddUserBox(true);
+    }
+
+  
 
 
     return (
     <div class="users-display">
         <h1>Users</h1>
-        <li>Andy</li>
-        <li>Ben</li>
-        <li>Chandra</li>
-        <li>Sarah</li>
+        <div>
+            {users.map(user => <button onClick={e => setCurrentUser(user)} class="user">{user}</button>)}
+        </div>
+
+        <> 
+            {(displayAddUserBox == true)?
+                <div>
+                    <div class="vertical-align">
+                        <input id="newUser" onChange={e => setUser(e.target.value)}></input>
+                        <button onClick={submitUser}>Submit User</button>
+
+                    </div>
+                </div> :
+                <div>
+                    <button onClick={addUser}>Add User</button>
+                </div>
+            }
+        </>
 
     </div>
     );
