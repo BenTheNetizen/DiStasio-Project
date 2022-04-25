@@ -7,11 +7,20 @@
 	margin-bottom: 10px;
 }
 
+
 .nav-link{
     list-style-type: none;
     margin-right: 0 !important;
     border-radius: 10px;
     border: 3px solid #115be4;
+	padding: 5px;
+	margin: 5px;
+
+
+}
+.nav-link:hover{
+    filter: brightness(150%);
+
 }
 .users-button{
 	border-radius: 10px;
@@ -36,10 +45,6 @@
 .right-align{
 	display: flex;
 	margin-right: 2.5%;
-}
-.report-button {
-	border-radius: 10px;
-	outline: 2px solid black;
 }
 
 .report-button:hover {
