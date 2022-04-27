@@ -50,3 +50,36 @@
 .report-button:hover {
 	filter: brightness(125%);
 }
+
+.curbside-home {
+	display: flex;
+	flex-direction: column;
+	height: min-content;
+	justify-content: left;
+	padding: 10px;
+	width: auto;
+	height: auto;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 20px;
+	outline: 1px solid black;
+}
+
+.home-heading {
+	font-size: 30px;
+	font-weight: bold;
+
+}
+
+.home-subheading {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.row-div{
+	display: flex;
+	flex-direction: Row;
+	height: min-content;
+	justify-content: left;
+	padding: 10px;
+}

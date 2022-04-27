@@ -31,9 +31,9 @@ function Sidebar() {
         comments.push(comment);
         setaddCommentBox(false);
         console.log(comments)
-
-
     }
+
+    const [displayReplyInput, setDisplayReplyInput] = useState("");
     return (
     <div>
         <div>
@@ -41,7 +41,10 @@ function Sidebar() {
             <div>
                 {comments.map(comment => <div class="comment-box">
                 {comment}
+                <>
                 <button >Reply</button>
+
+                </>
             </div>)}
             </div>
         </div>

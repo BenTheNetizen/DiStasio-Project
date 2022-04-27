@@ -18,9 +18,8 @@ function Report1() {
     }
     return (
     <div>
- 
+        <Link class="back-button" to="/">Back</Link>
         <div class="header">
-            <Link to="/">Back</Link>
             <div class="heading-curbside">
                 <h2>Pathology Report #1</h2>
             </div>
