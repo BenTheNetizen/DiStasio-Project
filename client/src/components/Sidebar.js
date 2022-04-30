@@ -41,8 +41,22 @@ function Sidebar(props) {
     const submitReply = (e) => {
         replies.push(reply);
         setDisplayReplyInput(false);
-
     }
+
+
+    const [expand, setExpand] = useState({});
+
+    const expandThread = async() => {
+        setExpand(true);
+    }
+    const minimizeThread = async() => {
+        setExpand(false);
+    }
+
+
+
+
+
     return (
     <div>
         <div>
@@ -59,11 +73,26 @@ function Sidebar(props) {
                     </div>
                 </div> :
                 <div>
-                    <div>
-                        {replies.map(reply => <div class="comment-box">
-                            {reply}
-                        </div>)}
-                    </div>
+                    <>
+                        {
+                            (expand == true)?
+                            <div>
+                                <div>
+                                    {replies.map(reply => <div class="reply-box">
+                                        {reply}
+                                    </div>)}
+                                </div>
+                                <button onClick={minimizeThread}>Minimize</button>
+
+                            </div>:
+                            <div>
+                                <button onClick={expandThread}>Expand</button>
+                            </div>
+
+                        }
+                    </>
+
+
                         
                     <button onClick={addreply}>Reply</button>
                 </div>
