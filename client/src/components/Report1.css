@@ -12,17 +12,37 @@
 	border-radius: 10px;
 }
 
+
+.back-button {
+	border-radius: 10px;
+    outline: 1px solid black;
+	width: 40px;
+	height: 40px;
+	font-size: 15px;
+	padding: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+
+
+}
+
+.back-button:hover {
+	transform: scale(1.1);
+	filter: brightness(125%);
+}
+
 .heading-curbside{
-    padding: 5px;
+
+	margin-top: 10px;
+    margin-bottom: 10px;
+	padding: 5px;
     outline: 1px solid black;
     border-radius: 10px;
-    display: flex;
+	display: flex;
 	height: min-content;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .document-viewing{
@@ -37,3 +57,4 @@
 	display: flex;
 	margin-right: 2.5%;
 }
+

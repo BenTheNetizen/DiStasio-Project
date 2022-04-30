@@ -7,6 +7,7 @@ const createPostURL = "http://localhost:4000/posts/create/";
 const createCommentURL = "http://localhost:4000/comments/create/";
 
 const comments = ["comment1", "comment2"]
+const replies = ["reply1", "reply2"]
 
 function Sidebar(props) {
     /*
@@ -46,6 +47,7 @@ function Sidebar(props) {
         }).catch(err => console.log(err));
         //comments.push(comment);
         setaddCommentBox(false);
+
         //console.log(comments)
         console.log(`${currentUser} Created post: ${comment}`);
 
@@ -55,6 +57,24 @@ function Sidebar(props) {
         console.log(`Selected: ${e.target.textContent}`);
         setCurrentUser(e.target.textContent);
     }
+
+        console.log(comments)
+    }
+
+    const [reply, setReply] = useState("");
+
+    const [displayReplyInput, setDisplayReplyInput] = useState("");
+
+    const addreply = async() => {
+        setDisplayReplyInput(true);
+    }
+    const removereply = async() => {
+        setDisplayReplyInput(false);
+    }
+    const submitReply = (e) => {
+        replies.push(reply);
+        setDisplayReplyInput(false);
+
 
     const submitReply = (e) => {
         console.log(`User ${currentUser} made reply: ${reply}`);
@@ -71,13 +91,34 @@ function Sidebar(props) {
     <div>
         <div>
             <h1>Sidebar</h1>
-            <div>
-                {comments.map(comment => <div class="comment-box">
-                {comment}
-                <button >Reply</button>
-            </div>)}
-            </div>
+                {comments.map(comment => 
+                    <div class="comment-box">{comment}
+        <> 
+            {(displayReplyInput == true)?
+                <div>
+                    <div>
+                        <input id="reply" onChange={e => setReply(e.target.value)}></input>
+                        <button onClick={submitReply}>Submit</button>
+                        <button onClick={removereply}>Cancel</button>
+                    </div>
+                </div> :
+                <div>
+                    <div>
+                        {replies.map(reply => <div class="comment-box">
+                            {reply}
+                        </div>)}
+                    </div>
+                        
+                    <button onClick={addreply}>Reply</button>
+                </div>
+            }
+        </>
         </div>
+                )}
+        </div>
+
+
+
 
         <div>
         <> 
@@ -123,7 +164,7 @@ function Sidebar(props) {
                     </div>
                 </div>
             }
-            </>
+        </>
             
         </div>
         <div>
