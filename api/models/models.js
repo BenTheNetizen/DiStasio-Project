@@ -38,8 +38,7 @@ var PostSchema = new Schema({
         default: Date.now
     },
     created_by: {
-        type: Schema.ObjectId,
-        ref: 'User',
+        type: String,
     },
     x_coordinate: {
         type: Number,
