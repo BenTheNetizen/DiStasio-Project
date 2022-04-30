@@ -32,16 +32,17 @@
 }
 
 .heading-curbside{
-    padding: 5px;
+
+	margin-top: 10px;
+    margin-bottom: 10px;
+	padding: 5px;
     outline: 1px solid black;
     border-radius: 10px;
-    display: flex;
+	display: flex;
 	height: min-content;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .document-viewing{
@@ -56,3 +57,4 @@
 	display: flex;
 	margin-right: 2.5%;
 }
+

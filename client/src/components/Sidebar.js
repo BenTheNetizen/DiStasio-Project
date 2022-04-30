@@ -4,6 +4,7 @@ import axios from 'axios';
 const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
 
 const comments = ["comment1", "comment2"]
+const replies = ["reply1", "reply2"]
 
 function Sidebar() {
     const [post, setPost] = React.useState(null);
@@ -33,22 +34,50 @@ function Sidebar() {
         console.log(comments)
     }
 
+    const [reply, setReply] = useState("");
+
     const [displayReplyInput, setDisplayReplyInput] = useState("");
+
+    const addreply = async() => {
+        setDisplayReplyInput(true);
+    }
+    const removereply = async() => {
+        setDisplayReplyInput(false);
+    }
+    const submitReply = (e) => {
+        replies.push(reply);
+        setDisplayReplyInput(false);
+
+    }
     return (
     <div>
         <div>
             <h1>Sidebar</h1>
-            <div>
-                {comments.map(comment => <div class="comment-box">
-                {comment}
-                <>
-                <button >Reply</button>
-
-                </>
-            </div>)}
-            </div>
+                {comments.map(comment => 
+                    <div class="comment-box">{comment}
+        <> 
+            {(displayReplyInput == true)?
+                <div>
+                    <div>
+                        <input id="reply" onChange={e => setReply(e.target.value)}></input>
+                        <button onClick={submitReply}>Submit</button>
+                        <button onClick={removereply}>Cancel</button>
+                    </div>
+                </div> :
+                <div>
+                    <div>
+                        {replies.map(reply => <div class="comment-box">
+                            {reply}
+                        </div>)}
+                    </div>
+                        
+                    <button onClick={addreply}>Reply</button>
+                </div>
+            }
+        </>
         </div>
-
+                )}
+        </div>
 
 
         <div>
@@ -89,7 +118,7 @@ function Sidebar() {
                     </div>
                 </div>
             }
-            </>
+        </>
             
         </div>
     </div>

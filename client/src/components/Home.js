@@ -15,8 +15,12 @@ function Home() {
                 Home
             </p>
             <div class="row-div">
-                <p class="home-subheading">Active Discussions</p>
-                <p class="home-subheading">Last Modified</p>
+                <div>
+                    <p class="home-subheading">Active Discussions</p>
+                </div>
+                <div>
+                    <p class="home-subheading">Last Modified</p>
+                </div>
             </div>
             <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1</Link>
 
