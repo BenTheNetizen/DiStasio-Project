@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 
 // post functions
 exports.get_all_posts = function(req, res) {
+    console.log('running get_all_posts');
     Post.find({}, function(err, post) {
         if (err)
             res.send(err);
@@ -15,6 +16,7 @@ exports.get_all_posts = function(req, res) {
 }
 exports.create_post = function(req, res) {
     var new_post = new Post(req.body);
+    console.log('running create_post');
     new_post.save(function(err, post) {
         if (err)
             res.send(err);
@@ -41,6 +43,7 @@ exports.get_all_users = function(req, res) {
 
 // comment functions
 exports.create_comment = function(req, res) {
+    console.log('running create_comment');
     var new_comment = {
         text: req.body.text,
         created_by: req.body.created_by,
