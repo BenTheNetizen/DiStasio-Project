@@ -6,15 +6,9 @@ const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
 const comments = ["comment1", "comment2"]
 const replies = ["reply1", "reply2"]
 
-function Sidebar() {
-    const [post, setPost] = React.useState(null);
-    React.useEffect(() => {
-        axios.get(baseURL).then((response) => {
-          setPost(response.data);
-        });
-      }, []);
+function Sidebar(props) {
 
-      
+    const [currentUser, setCurrentUser] = useState(null);
     const [addCommentBox, setaddCommentBox] = useState({});
 
     const addcomment = async() => {
