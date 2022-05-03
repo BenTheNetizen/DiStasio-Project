@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function Report1() {
     const [displayUsers, setDisplayUsers] = useState({});
-
+    const [currentUser, setCurrentUser] = useState("Anonymous");
 
     const handleUsersDisplay = async() => {
         setDisplayUsers(true);
@@ -16,6 +16,11 @@ function Report1() {
     const removeUsersDisplay = async() => {
         setDisplayUsers(false);
     }
+
+    const handleUserChange = (new_user) => {
+        setCurrentUser(new_user);
+    }
+
     return (
     <div>
         <Link class="back-button" to="/">Back</Link>
@@ -26,7 +31,8 @@ function Report1() {
             <> 
             {(displayUsers == true)?
                 <div>
-                    <Users />
+                    <h1>Current User: {currentUser}</h1>
+                    <Users handleUserChange={handleUserChange}/>
                     <button onClick={removeUsersDisplay} class="users-button">Back</button>
                 </div>
                 :
@@ -43,7 +49,9 @@ function Report1() {
 
         <div class="document-viewing">
             <DocumentComponent />
-            <Sidebar />
+            <Sidebar 
+                currentUser={currentUser}
+            />
         </div>
     </div>
     )

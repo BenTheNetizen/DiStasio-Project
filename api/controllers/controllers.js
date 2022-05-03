@@ -41,6 +41,7 @@ exports.get_all_users = function(req, res) {
 
 // comment functions
 exports.create_comment = function(req, res) {
+    console.log('running create_comment');
     var new_comment = {
         text: req.body.text,
         created_by: req.body.created_by,

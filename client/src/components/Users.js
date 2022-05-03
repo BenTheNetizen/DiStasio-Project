@@ -4,9 +4,8 @@ import './Users.css';
 
 const users = ["Andy", "Ben", "Chandra", "Sarah", "Distasio", "XP"];
 
-function Users() {
+function Users(props) {
     const [user, setUser] = useState("");
-    const [currentUser, setCurrentUser] = useState("");
     const[displayAddUserBox, setDisplayAddUserBox] = useState({});
     const submitUser = (e) => {
         users.push(user);
@@ -28,7 +27,14 @@ function Users() {
     <div class="users-display">
         <h1>Users</h1>
         <div>
-            {users.map(user => <button onClick={e => setCurrentUser(user)} class="user">{user}</button>)}
+            {users.map((user, index) => 
+                <button
+                    onClick={() => props.handleUserChange(user)}
+                    key={index}
+                    class="user">
+                        {user}
+                </button>
+            )}
         </div>
 
         <> 

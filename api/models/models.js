@@ -13,9 +13,7 @@ var CommentSchema = new Schema({
         required: 'Kindly enter the text of the post'
     },
     created_by: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: 'You need to attach a user to the comment'
+        type: String,
     },
     created_date: {
         type: Date,
@@ -38,13 +36,9 @@ var PostSchema = new Schema({
         default: Date.now
     },
     created_by: {
-        type: Schema.ObjectId,
-        ref: 'User',
+        type: String,
     },
-    x_coordinate: {
-        type: Number,
-    },
-    y_coordinate: {
+    index: {
         type: Number,
     },
     comments: [],
