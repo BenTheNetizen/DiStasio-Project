@@ -16,43 +16,24 @@ function Sidebar(props) {
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
     const [reply, setReply] = useState("");
-    const [displayReplyInput, setDisplayReplyInput] = useState([]);
-    const [commentID, setCommentID] = useState(null);
+    const [displayReplyInput, setDisplayReplyInput] = useState(false);
+    const [commentIndex, setcommentIndex] = useState(null);
+    const [commentID, setcommentID] = useState(null);
     const [addCommentBox, setaddCommentBox] = useState({});
     
     useEffect(() => {       
         axios.get(getPostsURL).then((response) => {
             setAllComments(response.data);
             console.log(response.data);
-            // sets the displayReplyInput to false for all comments
-            arr_ = new Array(6).fill(false);
-            setDisplayReplyInput(arr_);
         });
-      }, [addCommentBox]);
+      }, [addCommentBox, displayReplyInput, commentID]);
     
     
     //function to display the create comment box
     const addcomment = (e) => {
         setaddCommentBox(true);
-        setCommentID(e.target.getAttribute("data-id"));
+        setcommentIndex(e.target.getAttribute("data-id"));
         //console.log(e.target.getAttribute("data-id"));
-    }
-
-    const displayReply = (e) => {
-        let index = e.target.getAttribute("data-id");
-        debugger;
-        setDisplayReplyInput(prevState => {
-            prevState[index] = !prevState[index];
-            return prevState;
-        });
-        console.log('running function displayReply');
-    }
-
-    const cancelReply = (index) => {
-        setDisplayReplyInput(prevState => {
-            prevState[index] = false;
-            return prevState;
-        });
     }
 
     // function to close the create comment box
@@ -60,37 +41,62 @@ function Sidebar(props) {
         setaddCommentBox(false);
     }
 
+    const displayReply = (e) => {
+        setcommentID(e.target.getAttribute("data-id"));
+        setDisplayReplyInput(!displayReplyInput);
+        console.log('running function displayReply');
+    }
+
+    const cancelReply = (index) => {
+        setDisplayReplyInput(prevState => {
+            prevState[index] = prevState[index] ? false : true;
+            return prevState;
+        });
+    }
+
+    
+
     // function to submit post to the backend
     const submitComment = (e) => {
         // MAKE AXIOS POST REQUEST HERE
         axios.post(createPostURL, {
             text: comment,
             created_by: props.currentUser,
-            index: commentID
+            index: commentIndex
         }).then(response => {
             console.log(response);
         }).catch(err => {
             console.log(err)
         });
         
-        console.log(`User ${props.currentUser} Created post: ${comment} for commendID: ${commentID}`);
+        console.log(`User ${props.currentUser} Created post: ${comment} for commendID: ${commentIndex}`);
         setaddCommentBox(false);
     }
 
-    const addreply = async() => {
-        setDisplayReplyInput(true);
-    }
-    const removereply = async() => {
+    // function to submit reply to the backend
+    const submitReply = () => {
+        // MAKE AXIOS POST REQUEST HERE
+        axios.post(createCommentURL, {
+            text: reply,
+            created_by: props.currentUser,
+            created_date: new Date(),
+            post_id: commentID
+        }).then(response => {
+            console.log(response);
+        }).catch(err => {
+            console.log(err)
+        });
+        
+        console.log(`User ${props.currentUser} Created reply: ${reply} for commentID: ${commentID}`);
         setDisplayReplyInput(false);
-    }
-    const submitReply = (e) => {
-        replies.push(reply);
-        setDisplayReplyInput(false);
+        setcommentID(null);
+        // why is only this bottom line enough to for useeffect to run again?
+        setaddCommentBox(false);
     }
 
     
 
-    // dictionary with keys as commentID and values as the comment (post)
+    // dictionary with keys as commentIndex and values as the comment (post)
     var commentsDict = new Proxy({}, {
         get: function(object, property) {
           return object.hasOwnProperty(property) ? object[property] : false;
@@ -119,33 +125,26 @@ function Sidebar(props) {
                         <h4>Post: {commentsDict[i].text}</h4>
                         <p>Created by: {commentsDict[i].created_by}</p>
                         <p>Created date: {commentsDict[i].created_date}</p>
+                        <h4>Comments</h4>
                         {(commentsDict[i].comments.length > 0) ?
-                            commentsDict[i].comments.forEach(comment => {
+                            commentsDict[i].comments.map((comment, index) => {
                                 return (
-                                    <div class="comment">
-                                        <p>{comment.text}</p>
+                                    <div key={index} class="comment">
+                                        <p>Comment: {comment.text}</p>
                                         <p>Created by: {comment.created_by}</p>
                                         <p>Created date: {comment.created_date}</p>
                                     </div>
-                                )
-                        }) :
+                                )})
+                            
+                         :
                             <div>
                                 <p>No comments</p>
                             </div>
                         }
                     </div>
-                    
-                    {(displayReplyInput[i] == true) ?
-                        <div>
-                            <input type="text" placeholder="Reply" onChange={(e) => setReply(e.target.value)}></input>
-                            <button onClick={submitReply}>Submit</button>
-                            <button onClick={cancelReply(i)}>Cancel</button>
-                        </div> : 
-                        <div>
-                            <button onClick={displayReply} data-id={i}>Add Reply</button>
-                        </div>
-                    }
-                    
+                    <div>
+                        <button onClick={displayReply} data-id={commentsDict[i]._id}>Add Reply</button>
+                    </div>
                 </div>
             )
         } else {
@@ -161,42 +160,15 @@ function Sidebar(props) {
         <div>
             <h1>NUMBER OF POSTS LENGTH: {allComments.length}</h1>
             <h1>Sidebar</h1>
-                {/*
-                {comments.map((comment, index) => 
-                    <div class="comment-box">{comment}
-            <> 
-            {(displayReplyInput == true) ?
-                <div>
-                    <div>
-                        <input id="reply" onChange={e => setReply(e.target.value)}></input>
-                        <button onClick={submitReply}>Submit</button>
-                        <button onClick={removereply}>Cancel</button>
-                    </div>
-                </div> :
-                <div>
-                    <div>
-                        {replies.map(reply => <div class="comment-box">
-                            {reply}
-                        </div>)}
-                    </div>
-                        
-                    <button onClick={addreply}>Reply</button>
-                </div>
-            }
-        </>
-        </div>
-            )}*/}
         </div>
 
-
-        <div>
         <> 
-
             {(addCommentBox == true)?
                 <div>
                     <p>
                         <div class="vertical-align">
-                            <h1>User: {props.currentUser}</h1>
+                            <h1>Create a comment</h1>
+                            <h3>User: {props.currentUser}</h3>
                             <input id="comment" onChange={e => setComment(e.target.value)}></input>
                             <button onClick={submitComment}>Submit Comment</button>
                             <button onClick={removecomment}>Close</button>
@@ -204,12 +176,22 @@ function Sidebar(props) {
                     </p>
                 </div> :
                 <div class="sidebar-align">
-                    {currentPostsJSX}
+                    {(displayReplyInput == true) ?
+                        <div class="vertical-align">
+                            <h1>Create a reply</h1>
+                            <h3>User: {props.currentUser}</h3>
+                            <input id="comment" onChange={e => setReply(e.target.value)}></input>
+                            <button onClick={submitReply}>Submit Reply</button>
+                            <button onClick={displayReply} data-id="0">Close</button>
+                        </div>
+                        : 
+                        <div>
+                            {currentPostsJSX}
+                        </div>}
                 </div>
             }
         </>
             
-        </div>
     </div>
     )
 }

@@ -51,7 +51,7 @@ exports.create_comment = function(req, res) {
     Post.findById(req.body.post_id, function(err, post) {
         if (err)
             res.send(err);
-        console.log(req.body.post_id);
+        console.log(`post_id: ${req.body.post_id}`);
 
         post.comments.push(new_comment);
         console.log(post);
