@@ -16,24 +16,43 @@ function Sidebar(props) {
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
     const [reply, setReply] = useState("");
-    const [displayReplyInput, setDisplayReplyInput] = useState("");
+    const [displayReplyInput, setDisplayReplyInput] = useState([]);
     const [commentID, setCommentID] = useState(null);
     const [addCommentBox, setaddCommentBox] = useState({});
-    const [addReplyBox, setaddReplyBox] = useState({});
     
     useEffect(() => {       
         axios.get(getPostsURL).then((response) => {
             setAllComments(response.data);
             console.log(response.data);
+            // sets the displayReplyInput to false for all comments
+            arr_ = new Array(6).fill(false);
+            setDisplayReplyInput(arr_);
         });
       }, [addCommentBox]);
-      
+    
     
     //function to display the create comment box
     const addcomment = (e) => {
         setaddCommentBox(true);
         setCommentID(e.target.getAttribute("data-id"));
         //console.log(e.target.getAttribute("data-id"));
+    }
+
+    const displayReply = (e) => {
+        let index = e.target.getAttribute("data-id");
+        debugger;
+        setDisplayReplyInput(prevState => {
+            prevState[index] = !prevState[index];
+            return prevState;
+        });
+        console.log('running function displayReply');
+    }
+
+    const cancelReply = (index) => {
+        setDisplayReplyInput(prevState => {
+            prevState[index] = false;
+            return prevState;
+        });
     }
 
     // function to close the create comment box
@@ -90,7 +109,6 @@ function Sidebar(props) {
             commentsDict[allComments[i].index] = allComments[i];
         }
     }
-   
     var currentPostsJSX = [];
     // iterate through all posts, if commentsDict[post.index] is true, then display the post
     for (let i = 0; i <= 6; i++) {
@@ -116,15 +134,18 @@ function Sidebar(props) {
                             </div>
                         }
                     </div>
-                    {(isReplyingDict[i] == true) ?
+                    
+                    {(displayReplyInput[i] == true) ?
                         <div>
                             <input type="text" placeholder="Reply" onChange={(e) => setReply(e.target.value)}></input>
                             <button onClick={submitReply}>Submit</button>
+                            <button onClick={cancelReply(i)}>Cancel</button>
                         </div> : 
-                        <div class="post-footer">
-                            <button>Add Reply</button>
+                        <div>
+                            <button onClick={displayReply} data-id={i}>Add Reply</button>
                         </div>
                     }
+                    
                 </div>
             )
         } else {
@@ -135,7 +156,6 @@ function Sidebar(props) {
             )
         }
     }
-
     return (
     <div>
         <div>
