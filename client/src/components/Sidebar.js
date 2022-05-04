@@ -1,6 +1,8 @@
 import './Sidebar.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Collapsible from 'react-collapsible';
+
 const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
 
 const comments = ["comment1", "comment2"]
@@ -20,13 +22,15 @@ function Sidebar(props) {
     const [commentIndex, setcommentIndex] = useState(null);
     const [commentID, setcommentID] = useState(null);
     const [addCommentBox, setaddCommentBox] = useState({});
+    const [test, setTest] = useState([]);
     
     useEffect(() => {       
         axios.get(getPostsURL).then((response) => {
             setAllComments(response.data);
             console.log(response.data);
         });
-      }, [addCommentBox, displayReplyInput, commentID]);
+        console.log('RUNNING USE EFFECT');
+      }, [test, addCommentBox, displayReplyInput, commentID]);
     
     
     //function to display the create comment box
@@ -117,48 +121,50 @@ function Sidebar(props) {
     }
     var currentPostsJSX = [];
     // iterate through all posts, if commentsDict[post.index] is true, then display the post
-    for (let i = 0; i <= 6; i++) {
+    for (let i = 0; i <= 8; i++) {
         if (commentsDict[i] != false) {
             currentPostsJSX.push(
                 <div class="post">
-                    <div class="post-header">
-                        <p>{commentsDict[i].created_by}</p>
-                        <p>{commentsDict[i].created_date}</p>
-                        <h4>{commentsDict[i].text}</h4>
+                    <Collapsible trigger={commentsDict[i].created_by}>
+                        <div class="post-header">
+                            <p>{commentsDict[i].created_date}</p>
+                            <h4>{commentsDict[i].text}</h4>
 
-                        {/* <p>Created by: {commentsDict[i].created_by}</p>
-                        <p>Created date: {commentsDict[i].created_date}</p>
-                        <h4>Post: {commentsDict[i].text}</h4> */}
-                        <h4>Replies</h4>
-                        {(commentsDict[i].comments.length > 0) ?
-                            commentsDict[i].comments.map((comment, index) => {
-                                return (
-                                    <div key={index} class="comment">
-                                        <p>{comment.created_by}</p>
-                                        <p>{comment.created_date}</p>
-                                        <p>{comment.text}</p>
-{/* 
-                                        <p>Created by: {comment.created_by}</p>
-                                        <p>Created date: {comment.created_date}</p>
-                                        <p>Comment: {comment.text}</p> */}
-                                    </div>
-                                )})
-                            
-                         :
-                            <div>
-                                <p>No comments</p>
-                            </div>
-                        }
-                    </div>
-                    <div>
-                        <button onClick={displayReply} data-id={commentsDict[i]._id}>Add Reply</button>
-                    </div>
+                            {/* <p>Created by: {commentsDict[i].created_by}</p>
+                            <p>Created date: {commentsDict[i].created_date}</p>
+                            <h4>Post: {commentsDict[i].text}</h4> */}
+                            <h4>Replies</h4>
+                            {(commentsDict[i].comments.length > 0) ?
+                                commentsDict[i].comments.map((comment, index) => {
+                                    return (
+                                        <div key={index} class="comment">
+                                            <p>{comment.created_by}</p>
+                                            <p>{comment.created_date}</p>
+                                            <p>{comment.text}</p>
+                                            {/* 
+                                            <p>Created by: {comment.created_by}</p>
+                                            <p>Created date: {comment.created_date}</p>
+                                            <p>Comment: {comment.text}</p> */}
+                                        </div>
+                                    )})
+                                
+                            :
+                                <div>
+                                    <p>No comments</p>
+                                </div>
+                            }
+                        </div>
+                        <div>
+                            <button onClick={displayReply} data-id={commentsDict[i]._id}>Add Reply</button>
+                        </div>
+                    </Collapsible>
+                    
                 </div>
             )
         } else {
             currentPostsJSX.push(
                 <div>
-                    <button class="add-comment-button" data-id={i} onClick={addcomment}><img src="/comment.png" id="add-comment-image" alt="image" /></button>
+                    <button class="add-comment-button" data-id={i} onClick={addcomment}>+</button>
                 </div>
             )
         }

@@ -34,8 +34,10 @@ function Report1() {
                 <div class="heading-curbside-2">
                     <div class="right-align">
                         <button class="notification-button"><img src="/notification.svg" id="notification-image" alt="image" /></button>
-                        <h1>Current User: {currentUser}</h1>
-                        <Users handleUserChange={handleUserChange}/>
+                        <Users 
+                            handleUserChange={handleUserChange}
+                            currentUser={currentUser}
+                        />
                         <button onClick={removeUsersDisplay} class="users-back-button">Back</button>
 
                     </div>  
