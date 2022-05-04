@@ -22,9 +22,7 @@
     filter: brightness(150%);
 
 }
-.users-button{
-	border-radius: 10px;
-}
+
 
 .heading-curbside{
     display: flex;
@@ -32,6 +30,7 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	background: white;
 }
 
 .document-viewing{
@@ -42,10 +41,6 @@
 	justify-content: center;
 }
 
-.right-align{
-	display: flex;
-	margin-right: 2.5%;
-}
 
 .report-button:hover {
 	filter: brightness(125%);

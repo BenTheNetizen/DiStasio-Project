@@ -7,7 +7,9 @@
     opacity: .1;
 }
 
+
 .add-comment-button:hover{
+    cursor: pointer;    
     transform: scale(1.1);
     opacity: 1;
 }
@@ -37,22 +39,26 @@
     
 }
 
-.comment-box{
+.comment{
     border-radius: 10px;
     padding: 5px;
     outline: 1px solid black;
     margin: 10px;
-    display: flex;
-    flex-direction: column;
-    height: min-content;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+    transition: all .2s ease-in-out; 
+}
+
+.comment:hover{
+    transform: scale(1.05);
 }
 
 .post {
-    padding: 5px;
+    padding: 10px;
     border-radius: 25px;
     outline: 1px solid black;
 
+}
+
+#add-comment-image {
+    width: 20px;
+    height: auto;
 }

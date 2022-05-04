@@ -122,17 +122,25 @@ function Sidebar(props) {
             currentPostsJSX.push(
                 <div class="post">
                     <div class="post-header">
-                        <h4>Post: {commentsDict[i].text}</h4>
-                        <p>Created by: {commentsDict[i].created_by}</p>
+                        <p>{commentsDict[i].created_by}</p>
+                        <p>{commentsDict[i].created_date}</p>
+                        <h4>{commentsDict[i].text}</h4>
+
+                        {/* <p>Created by: {commentsDict[i].created_by}</p>
                         <p>Created date: {commentsDict[i].created_date}</p>
-                        <h4>Comments</h4>
+                        <h4>Post: {commentsDict[i].text}</h4> */}
+                        <h4>Replies</h4>
                         {(commentsDict[i].comments.length > 0) ?
                             commentsDict[i].comments.map((comment, index) => {
                                 return (
                                     <div key={index} class="comment">
-                                        <p>Comment: {comment.text}</p>
+                                        <p>{comment.created_by}</p>
+                                        <p>{comment.created_date}</p>
+                                        <p>{comment.text}</p>
+{/* 
                                         <p>Created by: {comment.created_by}</p>
                                         <p>Created date: {comment.created_date}</p>
+                                        <p>Comment: {comment.text}</p> */}
                                     </div>
                                 )})
                             
@@ -150,17 +158,17 @@ function Sidebar(props) {
         } else {
             currentPostsJSX.push(
                 <div>
-                    <button class="add-comment-button" data-id={i} onClick={addcomment}>+</button>
+                    <button class="add-comment-button" data-id={i} onClick={addcomment}><img src="/comment.png" id="add-comment-image" alt="image" /></button>
                 </div>
             )
         }
     }
     return (
     <div>
-        <div>
+        {/* <div>
             <h1>NUMBER OF POSTS LENGTH: {allComments.length}</h1>
             <h1>Sidebar</h1>
-        </div>
+        </div> */}
 
         <> 
             {(addCommentBox == true)?

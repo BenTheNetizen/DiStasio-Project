@@ -1,15 +1,33 @@
-.header{
-	display: flex;
-	height: min-content;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	margin-bottom: 10px;
 
-}
 
 .users-button{
+	background-color: white;
 	border-radius: 10px;
+	border: none;
+	background: none;	
+}
+.users-button:hover{
+	cursor: pointer;
+	filter: brightness(125%);
+}
+
+.users-back-button {
+	outline: 1px solid black;
+	border-radius: 25px;
+	border: none;
+	background: none;
+}
+
+
+.notification-button{
+	background-color: white;
+	border-radius: 10px;
+	border: none;
+	background: none;	
+}
+.notification-button:hover{
+	cursor: pointer;
+	filter: brightness(125%);
 }
 
 
@@ -55,6 +73,27 @@
 
 .right-align{
 	display: flex;
-	margin-right: 2.5%;
+	flex-direction: row;
+	background-color: white;
+	outline: 1px solid black;
+	padding: 5px;
 }
 
+
+
+
+#collaborators-image {
+	width: 40px;
+	height: auto;
+}
+
+.heading-curbside-2{
+	margin-top: 10px;
+	background-color: white;
+	outline: 1px solid black;
+}
+
+#notification-image{
+	width: 20px;
+	height: auto;
+}

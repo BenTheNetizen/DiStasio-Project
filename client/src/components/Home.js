@@ -8,8 +8,9 @@ function Home() {
     return (
     <div>
         <div class="heading-curbside">
-                <h1>Curbside</h1>
+            <img src="/curbside_logo.svg" alt="image" id="curbside-logo"></img>
         </div>
+
         <div class="curbside-home">
             <p class="home-heading">
                 Home
