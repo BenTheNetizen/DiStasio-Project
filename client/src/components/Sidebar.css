@@ -49,3 +49,10 @@
 	justify-content: center;
 	flex-direction: column;
 }
+
+.post {
+    padding: 5px;
+    border-radius: 25px;
+    outline: 1px solid black;
+
+}
