@@ -138,8 +138,9 @@ function Sidebar(props) {
                                     return (
                                         <div key={index} class="comment">
                                             <p>{comment.created_by}</p>
+                                            <p><strong>{comment.text}</strong></p>
                                             <p>{comment.created_date}</p>
-                                            <p>{comment.text}</p>
+                                            
                                             {/* 
                                             <p>Created by: {comment.created_by}</p>
                                             <p>Created date: {comment.created_date}</p>
