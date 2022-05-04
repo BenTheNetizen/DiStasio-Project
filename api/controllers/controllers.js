@@ -22,6 +22,14 @@ exports.create_post = function(req, res) {
     });
 }
 
+exports.delete_posts = function(req, res) {
+    Post.remove({}, function(err, post) {
+        if (err)
+            res.send(err);
+        res.json(post);
+    });
+}
+
 // user functions
 exports.create_user = function(req, res) {
     var new_user = new User(req.body);
@@ -38,6 +46,7 @@ exports.get_all_users = function(req, res) {
         res.json(user);
     });
 }
+
 
 // comment functions
 exports.create_comment = function(req, res) {

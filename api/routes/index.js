@@ -22,6 +22,8 @@ module.exports = function(app) {
         .post(controller.create_post)
 
 
+    app.route('/posts/delete')
+        .post(controller.delete_posts)
     // user endpoints
     /*
     /users/create/

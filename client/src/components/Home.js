@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import './Home.css';
+import axios from 'axios';
 
+const deleteCommentsURL = "http://localhost:4000/posts/delete";
 
 function Home() {
+
+    const deleteComments = () => {
+        axios.post(deleteCommentsURL).then((response) => {
+            console.log(response);
+        });
+    }
 
     return (
     <div>
@@ -23,12 +31,12 @@ function Home() {
                     <p class="home-subheading">Last Modified</p>
                 </div>
             </div>
-            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1</Link>
-
+            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1 <i onClick={deleteComments} class="fa fa-trash-o"></i></Link>
+            
             <p class="home-subheading">Resolved Discussions</p>
-            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1</Link>
-            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1</Link>
-            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1</Link>
+            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1 <i class="fa fa-trash-o"></i></Link>
+            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1 <i class="fa fa-trash-o"></i></Link>
+            <Link style={{ textDecoration: 'none' }}  class="nav-link" to="/Report1">Report 1 <i class="fa fa-trash-o"></i></Link>
 
 
         </div>
