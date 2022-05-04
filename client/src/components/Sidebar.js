@@ -127,9 +127,8 @@ function Sidebar(props) {
                 <div class="post">
                     <Collapsible trigger={commentsDict[i].created_by}>
                         <div class="post-header">
-                            <p>{commentsDict[i].created_date}</p>
                             <h4>{commentsDict[i].text}</h4>
-
+                            <p>{commentsDict[i].created_date}</p>
                             {/* <p>Created by: {commentsDict[i].created_by}</p>
                             <p>Created date: {commentsDict[i].created_date}</p>
                             <h4>Post: {commentsDict[i].text}</h4> */}
@@ -150,7 +149,7 @@ function Sidebar(props) {
                                 
                             :
                                 <div>
-                                    <p>No comments</p>
+                                    <p>No replies</p>
                                 </div>
                             }
                         </div>
