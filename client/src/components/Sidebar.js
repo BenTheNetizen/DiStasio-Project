@@ -20,18 +20,20 @@ function Sidebar(props) {
     const [commentIndex, setcommentIndex] = useState(null);
     const [commentID, setcommentID] = useState(null);
     const [addCommentBox, setaddCommentBox] = useState({});
+    const [test, setTest] = useState(false);
     
     useEffect(() => {       
         axios.get(getPostsURL).then((response) => {
             setAllComments(response.data);
             console.log(response.data);
         });
-      }, [addCommentBox, displayReplyInput, commentID]);
+      }, [test, addCommentBox, displayReplyInput, commentID]);
     
     
     //function to display the create comment box
     const addcomment = (e) => {
         setaddCommentBox(true);
+        console.log(`index: ${e.target.getAttribute('data-id')}`);
         setcommentIndex(e.target.getAttribute("data-id"));
         //console.log(e.target.getAttribute("data-id"));
     }
@@ -92,6 +94,7 @@ function Sidebar(props) {
         setcommentID(null);
         // why is only this bottom line enough to for useeffect to run again?
         setaddCommentBox(false);
+        setTest(!test);
     }
 
     
@@ -165,15 +168,13 @@ function Sidebar(props) {
         <> 
             {(addCommentBox == true)?
                 <div>
-                    <p>
-                        <div class="vertical-align">
-                            <h1>Create a comment</h1>
-                            <h3>User: {props.currentUser}</h3>
-                            <input id="comment" onChange={e => setComment(e.target.value)}></input>
-                            <button onClick={submitComment}>Submit Comment</button>
-                            <button onClick={removecomment}>Close</button>
-                        </div>
-                    </p>
+                    <div class="vertical-align">
+                        <h1>Create a comment</h1>
+                        <h3>User: {props.currentUser}</h3>
+                        <input id="comment" onChange={e => setComment(e.target.value)}></input>
+                        <button onClick={submitComment}>Submit Comment</button>
+                        <button onClick={removecomment}>Close</button>
+                    </div>
                 </div> :
                 <div class="sidebar-align">
                     {(displayReplyInput == true) ?
